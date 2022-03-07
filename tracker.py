@@ -83,6 +83,7 @@ def storeNotify(storeIndex):
 while oldStockStatuses == newStockStatuses:
     for i in range(len(links)):
         driver.switch_to.window(driver.window_handles[i])
+        driver.refresh()
         if i < 3: # Not PS Direct
             status = driver.find_element(By.XPATH, xPaths[i]).text
             newStockStatuses[i] = status

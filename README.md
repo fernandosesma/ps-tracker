@@ -1,4 +1,4 @@
-# PlayStation 5 Tracker [v1.0]
+# PlayStation 5 Tracker [v1.0.1]
 
 ### **Motivation**
 Obtaining a PlayStation 5 has become a three-way battle between botters, scalpers, and legitimate buyers. This program uses web scraping to automate the process of refreshing storefront pages to check for new PS5 stock. Currently, the program checks Amazon, Best Buy, Target, and PlayStation Direct. The code uses the *time*, *webbrowser*, *selenium*, and *plyer* packages.
@@ -6,7 +6,8 @@ Obtaining a PlayStation 5 has become a three-way battle between botters, scalper
 The program does not seek to automate the process of *checking out* on the storefront. It only seeks to resolve the issue of imperfect notification channels (i.e. NowInStock, Twitter). The author sees the practice of total automation in purchasing to be unethical (as most people who engage seek to hoard and/or scalp supply).
 
 ### **Methodology**
-Read on to learn more about how the program works. Currently using *ChromeDriver 99.0.4844.51*.
+Read on to learn more about how the program works. Currently using *ChromeDriver 99.0.4844.51*. **Note: The program will only work if you're using Chrome version 99. I will continue to update the program for future versions of Chrome.**
+* Make sure that you change the path of `service` to wherever *chromedriver_v99* will be stored on your local machine.
 * `statusInit()` checks each storefront for the current (or what will be *old*) status on stock. *Selenium* will open the Chrome browser and seek the HTML container noting stock status via XPath for each storefront. *Important Note:* The third index corresponds to the PlayStation Direct storefront, but uses *Selenium's* `find_elements` *(plural)* method instead of the `find_element` *(singular)* method. I could not accurately find the proper element with the singular method. This is evident in the rest of the code and will be fixed in later builds.
 * `windowInit()` will initialize where the main loop runs. All storefront pages open in the same window in separate tabs then return to the first tab to begin checking.
 * `storeNotify()` triggers a Windows notification when a store has new stock.
