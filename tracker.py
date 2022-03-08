@@ -1,12 +1,16 @@
 # TO-DO: Suppress warnings in terminal: usb_device_handle_win.cc
 
+# --- SETUP AND METHODS --- #
+
+
 # Import statements
 
 import time
 import webbrowser as wb
+import selenium.webdriver.support.expected_conditions as ec
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.keys import Keys # DEBUG
+from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.common.by import By
 from plyer import notification
 
@@ -44,15 +48,13 @@ newStockStatuses = ["","","",""]
 def statusInit():
     for i in range(len(links)):
         driver.get(links[i])
+        time.sleep(5) # wait for pages to load completely
         if i < 3:
             oldStockStatuses[i] = driver.find_element(By.XPATH, xPaths[i]).text
         else:
             psDirectElements = driver.find_elements(By.XPATH, xPaths[i])
             oldStockStatuses[i] = psDirectElements[1].text
     driver.quit
-
-statusInit()
-oldStockStatuses = newStockStatuses # Initialize new array, which will change with loop
 
 # Initialize windows to check
 
@@ -66,8 +68,6 @@ def windowInit():
         driver.get(links[i+1])
     driver.switch_to.window(driver.window_handles[0]) # Return to the first tab
 
-windowInit()
-
 # Notification method
 
 def storeNotify(storeIndex):
@@ -78,19 +78,25 @@ def storeNotify(storeIndex):
         timeout=10
     )
 
-# --- MAIN LOOP --- #
+# --- MAIN LOOP/CODE EXECUTION --- #
+
+
+statusInit()
+oldStockStatuses = newStockStatuses # Initialize new array, which will change with loop
+windowInit()
 
 while oldStockStatuses == newStockStatuses:
     for i in range(len(links)):
         driver.switch_to.window(driver.window_handles[i])
         driver.refresh()
+        time.sleep(5) # refresh timer, waits for page to load completely
+        wait(driver, timeout=5).until(ec.presence_of_element_located((By.XPATH, xPaths[i]))) # waits for specific element to load
         if i < 3: # Not PS Direct
             status = driver.find_element(By.XPATH, xPaths[i]).text
             newStockStatuses[i] = status
         if i == 3: # PS Direct
             status = driver.find_elements(By.XPATH, xPaths[i])
             newStockStatuses[i] = status[1].text
-        time.sleep(10) # refresh timer
 else:
     for i in range(len(links)):
         if oldStockStatuses[i] != newStockStatuses[i]:
