@@ -1,4 +1,4 @@
-# PlayStation 5 Tracker [v1.0.2]
+# PlayStation 5 Tracker [v1.0.3]
 
 ### **Motivation**
 Obtaining a PlayStation 5 has become a three-way battle between botters, scalpers, and legitimate buyers. This program uses web scraping to automate the process of refreshing storefront pages to check for new PS5 stock. Currently, the program checks Amazon, Best Buy, Target, and PlayStation Direct. The code uses the *time*, *webbrowser*, *selenium*, and *plyer* packages.
