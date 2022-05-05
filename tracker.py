@@ -16,7 +16,9 @@ from plyer import notification
 
 # Import Chrome as a 'Service' object
 
-service = Service("C:/Users/Fernando Sesma/Documents/Code/ps-tracker/chromedriver_v99/chromedriver.exe")
+chromedriverPath = input("Enter the absolute path to your chromedriver.exe on your local machine: ")
+
+service = Service(chromedriverPath)
 options = webdriver.ChromeOptions()
 driver = webdriver.Chrome(service = service)
 
