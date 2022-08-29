@@ -12,5 +12,3 @@ Read on to learn more about how the program works. Currently using *ChromeDriver
 * `windowInit()` will initialize where the main loop runs. All storefront pages open in the same window in separate tabs then return to the first tab to begin checking.
 * `storeNotify()` triggers a Windows notification when a store has new stock.
 * **MAIN LOOP**: Similar to the other methods, the program retrieves whether or not each storefront has stock by checking the corresponding HTML container via XPath (checking every 20 seconds with the *time* package). The *new* status is then compared to what was initialized at the beginning of the program (*old* status). When the HTML element has changed, this means the storefront has new stock and thus the `while` loop will trigger the `else` condition. Then (from the *plyer* package) the user will receive a Windows notification that the corresponding storefront has new stock.
-
-## Number of PS5s bought: **0** (gotta start somewhere)
