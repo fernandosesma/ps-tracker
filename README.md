@@ -1,4 +1,4 @@
-# PlayStation 5 Tracker [v1.0.3]
+# PlayStation 5 Tracker [v1.0.4]
 
 ### **Update** (October 9, 2022)
 
